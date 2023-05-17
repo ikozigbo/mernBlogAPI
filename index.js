@@ -11,8 +11,8 @@ app.use(cors());
 app.use(express.json());
 
 mongoose.connect(
-  "mongodb+srv://ikozigbo:ikponmwosa123@cluster0.b3dt4vh.mongodb.net/?retryWrites=true&w=majority"
-);
+  
+); 
 
 app.post("/register", async (req, res) => {
   const { username, password } = req.body;
