@@ -14,9 +14,7 @@ app.use(cors({ credentials: true, origin: "http://localhost:3000" }));
 app.use(express.json());
 app.use(cookieParser());
 
-mongoose.connect(
-  "mongodb+srv://ikozigbo:ikponmwosa123@cluster0.b3dt4vh.mongodb.net/?retryWrites=true&w=majority"
-);
+mongoose.connect();
 
 app.post("/register", async (req, res) => {
   const { username, password } = req.body;
@@ -56,6 +54,7 @@ app.post("/login", async (req, res) => {
 });
 
 app.get("/profile", (req, res) => {
+  jwt.verify(token, secret, {});
   res.json(req.cookies);
 });
 
