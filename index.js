@@ -6,6 +6,8 @@ const User = require("./models/Users");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const cookieParser = require("cookie-parser");
+const multer = require("multer");
+const uploadMiddleware = multer({ dest: "uploads/" });
 
 const salt = bcrypt.genSaltSync(10);
 const secret = "gekjirfjmo658493ghdnmewwsmndbn";
@@ -14,7 +16,9 @@ app.use(cors({ credentials: true, origin: "http://localhost:3000" }));
 app.use(express.json());
 app.use(cookieParser());
 
-mongoose.connect("");
+mongoose.connect(
+  ""
+);
 
 app.post("/register", async (req, res) => {
   const { username, password } = req.body;
@@ -64,11 +68,15 @@ app.get("/profile", (req, res) => {
     }
     res.json(info);
   });
-  res.json(req.cookies);
 });
 
 app.post("/logout", (req, res) => {
   res.cookie("token", "").json("ok");
+});
+
+app.post("/post", uploadMiddleware.single("file"), (req, res) => {
+  const {originalname} = req.file
+  res.json(req.file);
 });
 
 app.listen(4000);
