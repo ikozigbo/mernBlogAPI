@@ -19,7 +19,9 @@ app.use(express.json());
 app.use(cookieParser());
 
 mongoose
-  .connect("")
+  .connect(
+    "mongodb+srv://ikozigbo:ikponmwosa123@cluster0.b3dt4vh.mongodb.net/?retryWrites=true&w=majority"
+  )
   .then(() => {
     console.log("connected to db");
   })
